@@ -145,6 +145,14 @@ export async function POST(request: NextRequest) {
     return createRedirectHtml(url.toString())
   }
 
+  // 에러 리다이렉트 헬퍼 (auctionId가 있으면 상세 페이지로)
+  const errorRedirect = (auctionId: number | null, error: string, message: string) => {
+    const path = auctionId
+      ? `/auction/${auctionId}?error=${error}&message=${encodeURIComponent(message)}`
+      : `/auction?error=${error}&message=${encodeURIComponent(message)}`
+    return redirectTo(path)
+  }
+
   try {
     // form-urlencoded 데이터 파싱
     const formData = await request.formData()
@@ -167,14 +175,6 @@ export async function POST(request: NextRequest) {
         }
       } catch {}
       return null
-    }
-
-    // 에러 리다이렉트 헬퍼 (auctionId가 있으면 상세 페이지로)
-    const errorRedirect = (auctionId: number | null, error: string, message: string) => {
-      const path = auctionId
-        ? `/auction/${auctionId}?error=${error}&message=${encodeURIComponent(message)}`
-        : `/auction?error=${error}&message=${encodeURIComponent(message)}`
-      return redirectTo(path)
     }
 
     // 인증 실패인 경우
