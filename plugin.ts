@@ -8,6 +8,6 @@ export default {
   slug: 'auction',
   defaultEnabled: false,
   myPageMenus: [
-    { label: '내 경매', icon: 'Gavel', subPath: '/my' },
+    { label: '내 경매', icon: 'Gavel', subPath: '/mypage' },
   ],
 }
