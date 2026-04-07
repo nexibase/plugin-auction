@@ -1,0 +1,6 @@
+auctionsSelling     Auction[] @relation("AuctionSeller")
+auctionsWon         Auction[] @relation("AuctionWinner")
+bids                Bid[]
+autoBids            AutoBid[]
+auctionPenaltyCount Int       @default(0)
+auctionBannedUntil  DateTime?
